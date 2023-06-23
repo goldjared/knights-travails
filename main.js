@@ -51,8 +51,8 @@ function knight() {
   return { move };
 }
 
-function newNode(node) {
-  let coord = node;
+function makeNode(postion) {
+  let coord = position;
   let next = null;
   let prev = null;
 
