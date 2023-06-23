@@ -1,8 +1,8 @@
 function board(row, boardArray = []) {
-  if (row === 9) {
+  if (row === 8) {
     return boardArray;
   }
-  for (let i = 1; i < 9; i++) {
+  for (let i = 0; i < 8; i++) {
     boardArray.push([row, i]);
   }
   return board(row + 1, boardArray);
@@ -52,13 +52,14 @@ function knight() {
 }
 
 function makeNode(postion) {
-  let coord = position;
+  let data = position;
   let next = null;
   let prev = null;
 
-  return { coord, next, prev }
+  return { coord, next, prevVal }
 }
 
-let myBoard = board(1)
+let myBoard = board(0)
 let myKnight = knight();
 console.log(myBoard);
+console.log(myBoard.length);
