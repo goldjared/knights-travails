@@ -51,5 +51,14 @@ function knight() {
   return { move };
 }
 
+function newNode(node) {
+  let coord = node;
+  let next = null;
+  let prev = null;
+
+  return { coord, next, prev }
+}
+
 let myBoard = board(1)
+let myKnight = knight();
 console.log(myBoard);
