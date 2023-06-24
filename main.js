@@ -3,9 +3,17 @@ function board(row = 0, boardArray = []) {
     return boardArray;
   }
   for (let i = 0; i < 8; i++) {
-    boardArray.push([row, i]);
+    boardArray.push(makeNode([row, i]));
   }
   return board(row + 1, boardArray);
+}
+
+function makeNode(position) {
+  let data = position;
+  let next = [];
+  let marked = false;
+
+  return { data, next, marked };
 }
 
 function knight() {
