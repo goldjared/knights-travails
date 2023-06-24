@@ -22,7 +22,7 @@ function knight() {
     const screenArray = currentPos.concat(targetPos);
     let screenArrayResult;
     screenArray.forEach((pos) => {
-      if (pos < 1 || pos > 8) {
+      if (pos < 0 || pos > 7) {
         screenArrayResult = false;
       }
     });
