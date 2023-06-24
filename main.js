@@ -11,7 +11,7 @@ function board(row, boardArray = []) {
     return boardArray;
   }
   for (let i = 0; i < 8; i++) {
-    boardArray.push(makeNode([row, i]));
+    boardArray.push([row, i]);
   }
   return board(row + 1, boardArray);
 }
