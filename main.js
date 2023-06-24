@@ -66,6 +66,7 @@ function makeNode(position) {
 }
 
 function graph(currentPos, node) {
+  let visitedNodes = [];
   let root = buildGraph(currentPos, node);
 
   function buildGraph(currentPos, node) {
