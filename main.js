@@ -1,11 +1,22 @@
-function board(row = 0, boardArray = []) {
-  if (row === 8) {
-    return boardArray;
+function buildBoard() {
+  let gameBoard = [];
+
+  let row = 0;
+  while (row != 8) {
+    for (let i = 0; i < 8; i++) {
+      gameBoard.push(makeNode([row, i]));
+    }
+    row++;
   }
-  for (let i = 0; i < 8; i++) {
-    boardArray.push(makeNode([row, i]));
+  return gameBoard;
+}
+
+function getSquareNode(position, board) {
+  for (let i = 0; i < 64; i++) {
+    if (board[i].data[0] === position[0] && board[i].data[1] === position[1]) {
+      return board[i];
+    }
   }
-  return board(row + 1, boardArray);
 }
 
 function makeNode(position) {
