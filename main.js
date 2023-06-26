@@ -46,6 +46,8 @@ function knight() {
       let possibleMoves = move(currentMove);
       for(let i = 0; i < possibleMoves.length; i++) {
         let workingNode = getSquareNode(possibleMoves[i], board)
+
+        node.next.push(workingNode);
         if(workingNode.marked === false) {
 
           node.next.push(workingNode);
