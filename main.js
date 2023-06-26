@@ -21,7 +21,7 @@ function getSquareNode(position, board) {
 
 function makeNode(position) {
   let data = position;
-  let next = []; 
+  let next = [];
   let marked = false;
 
   return { data, next, marked };
@@ -29,46 +29,21 @@ function makeNode(position) {
 
 function knight() {
   function graph(currentMove, board, target) {
-    // let visitedNodes = [];
-
     function buildGraph(currentMove, board, target) {
-      // if(currentMove === target) {
-      //   console.log(currentMove, 'this is the base????');
-      //   return;
-      // }
-      console.log(currentMove);
-      // console.log(board);
-
-          if(currentMove === target) return;
       let node = getSquareNode(currentMove, board);
       node.marked = true;
 
       let possibleMoves = move(currentMove);
-      for(let i = 0; i < possibleMoves.length; i++) {
-        let workingNode = getSquareNode(possibleMoves[i], board)
+
+      for (let i = 0; i < possibleMoves.length; i++) {
+        let workingNode = getSquareNode(possibleMoves[i], board);
 
         node.next.push(workingNode);
-        if(workingNode.marked === false) {
-
-          node.next.push(workingNode);
-
-
-          // workingNode.marked = true;
-          if(workingNode === target) return;
+        if (workingNode.marked === false) {
+          if (workingNode === target) return;
           buildGraph(workingNode.data, board, target);
-          // note: i want to adjust marked nodes, so the WORKING node, does NOT go back TO ITS PREVIOUS NODE.
-
         }
       }
-     
-      /*
-
-      what about a while currentMove != target move.
-      find currentMove on board. 
-        link its next possible moves to its next attrib.
-        mark currentMove as marked.
-
-      */
       return node;
     }
     let root = buildGraph(currentMove, board, target);
@@ -110,9 +85,9 @@ let myKnight = knight();
 // console.log(getSquareNode([3, 0], myBoard));
 // console.log(myBoard.getSquareNode([4,4]));
 // console.log(myBoard.length);
-let testThis = (myKnight.graph([0, 1], myBoard, [0,4]));
-console.log(testThis);
-// console.log(myBoard);
+let testThis = myKnight.graph([0, 1], myBoard, [0, 4]);
+// console.log(testThis);
+console.log(myBoard);
 // setTimeout(() => {
 //   console.log(myBoard[0], '1');
 // }, "300");
@@ -122,4 +97,3 @@ console.log(testThis);
 // setTimeout(() => {
 //   console.log(myBoard[0].next.next, 'here');
 // }, "300");
-
