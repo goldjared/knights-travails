@@ -76,31 +76,32 @@ function knight() {
     return possibleMoves;
   };
 
-  function traverse(startNode, end, N) { //start is node
+  function traverse(startNode, end, N) {
+    //start is node
     let visited = new Set();
     let queue = [[startNode]];
     // startNode.distance = 0;
 
-    while(queue.length > 0) {
+    while (queue.length > 0) {
       let node = queue.shift();
-      if(Array.isArray(node)) { node = node[0] }
-      let x = node.data[0]
-      let y = node.data[1]
+      if (Array.isArray(node)) {
+        node = node[0];
+      }
+      let x = node.data[0];
+      let y = node.data[1];
       let dist = node.distance;
-      if(x === end[0] && y === end[1]) {
+      if (x === end[0] && y === end[1]) {
         return dist;
       }
-      if(!visited.has(node)) {
-        visited.add(node)
+      if (!visited.has(node)) {
+        visited.add(node);
         let nextMoves = node.next;
-        nextMoves.forEach(move => {
+        nextMoves.forEach((move) => {
           dist += 1;
           queue.push(move);
-        })
+        });
       }
     }
-
-
   }
   return { move, graph, traverse };
 }
