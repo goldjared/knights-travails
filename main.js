@@ -1,6 +1,5 @@
 function buildBoard() {
   let gameBoard = [];
-
   let row = 0;
   while (row != 8) {
     for (let i = 0; i < 8; i++) {
@@ -22,9 +21,10 @@ function getSquareNode(position, board) {
 function makeNode(position) {
   let data = position;
   let next = [];
+  let distance = 0;
   let marked = false;
 
-  return { data, next, marked };
+  return { data, next, marked, distance };
 }
 
 function knight() {
@@ -75,25 +75,40 @@ function knight() {
     });
     return possibleMoves;
   };
-  return { move, graph };
+
+  function traverse(startNode, end, N) { //start is node
+    let visited = new Set();
+    let queue = [[startNode]];
+    // startNode.distance = 0;
+
+    while(queue.length > 0) {
+      let node = queue.shift();
+      if(Array.isArray(node)) { node = node[0] }
+      let x = node.data[0]
+      let y = node.data[1]
+      let dist = node.distance;
+      if(x === end[0] && y === end[1]) {
+        return dist;
+      }
+      if(!visited.has(node)) {
+        visited.add(node)
+        let nextMoves = node.next;
+        nextMoves.forEach(move => {
+          dist += 1;
+          queue.push(move);
+        })
+      }
+    }
+
+
+  }
+  return { move, graph, traverse };
 }
+
 let myBoard = buildBoard();
 let copyBoard = myBoard;
 let myKnight = knight();
-// console.log(typeof myBoard);
-// console.log(typeof fuck);
-// console.log(getSquareNode([3, 0], myBoard));
-// console.log(myBoard.getSquareNode([4,4]));
-// console.log(myBoard.length);
-let testThis = myKnight.graph([0, 1], myBoard, [0, 4]);
-// console.log(testThis);
-console.log(myBoard);
-// setTimeout(() => {
-//   console.log(myBoard[0], '1');
-// }, "300");
-// setTimeout(() => {
-//   console.log(myBoard[1].next, '2');
-// }, "300");
-// setTimeout(() => {
-//   console.log(myBoard[0].next.next, 'here');
-// }, "300");
+
+//myKnight.move(a, b) => build a graph, and then traverse that graph. and then output the result.
+// let testThis = myKnight.graph([0, 0], myBoard, [0, 4]);
+// console.log(myKnight.traverse(myBoard[0], [7,7]));
